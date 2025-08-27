@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Professional Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --dark-bg: #0b0f1a;
+            --dark-secondary: #131a2b;
+            --accent: #1db7ff;
+            --text-primary: #ffffff;
+            --text-secondary: #9bb0d3;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1, h2, h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+        
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(11, 15, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+        
+        nav.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding: 10px 0;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Home Section */
+        #home {
+            text-align: center;
+            position: relative;
+        }
+        
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(19, 26, 43, 0.5) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(19, 26, 43, 0.5) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .profile-container {
+            position: relative;
+            margin: 0 auto 40px;
+            width: 220px;
+            height: 220px;
+        }
+        
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(145deg, var(--dark-secondary), var(--dark-bg));
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--accent);
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiMxMzFhMmIiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSI4MCIgcj0iNDAiIGZpbGw9IiM5YmIwZDMiIG9wYWNpdHk9IjAuNyIvPjxyZWN0IHg9IjYwIiB5PSIxMzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzliYjBkMyIgb3BhY2l0eT0iMC43Ii8+PC9zdmc+');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .profile-pic::after {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            opacity: 0.2;
+            animation: pulse 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.2; }
+            100% { transform: scale(1.1); opacity: 0.1; }
+        }
+        
+        .motto {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--accent);
+            margin: 30px 0;
+            padding: 0 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .motto::before, .motto::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--text-secondary);
+            position: relative;
+            opacity: 0.7;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        /* About Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .skill-category {
+            background-color: var(--dark-secondary);
+            padding: 25px;
+            border-radius: 8px;
+            transition: var(--transition);
+            border: 1px solid rgba(29, 183, 255, 0.1);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent);
+        }
+        
+        .skill-category h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        /* Experience & Education */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), var(--dark-secondary));
+        }
+        
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+            background-color: var(--dark-secondary);
+            padding: 25px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 30px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(29, 183, 255, 0.2);
+        }
+        
+        .timeline-item h3 {
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .timeline-item .date {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .timeline-item .location {
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background-color: var(--dark-secondary);
+            padding: 25px;
+            border-radius: 8px;
+            transition: var(--transition);
+            height: 100%;
+            border: 1px solid rgba(29, 183, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent);
+        }
+        
+        .project-card:hover::before {
+            height: 100%;
+        }
+        
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .project-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            transform: translateX(5px);
+        }
+        
+        .project-link i {
+            margin-left: 5px;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background-color: var(--dark-secondary);
+            color: var(--accent);
+            font-weight: 500;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-btn:hover {
+            background-color: rgba(29, 183, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .contact-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: var(--dark-secondary);
+            border: 1px solid rgba(29, 183, 255, 0.1);
+            border-radius: 4px;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(29, 183, 255, 0.2);
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(29, 183, 255, 0.2), transparent);
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background-color: rgba(29, 183, 255, 0.1);
+            box-shadow: 0 0 15px rgba(29, 183, 255, 0.3);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--dark-secondary);
+            color: var(--text-primary);
+            padding: 15px 25px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--accent);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(155, 176, 211, 0.2);
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--text-primary);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+            
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-container {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-bg);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--text-primary);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">Mihir Trivedi</div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="cyber-grid"></div>
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-pic"></div>
+            </div>
+            <h1>Mihir Trivedi</h1>
+            <p class="motto">"Threat Hunter, Policy Crafter, Cloud Builder: The Security Engineer for the Modern World."</p>
+            <a href="#contact" class="btn">Get In Touch</a>
+        </div>
+        <div class="scroll-down" onclick="scrollToSection('about')">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>I thrive on challenges that push me to think, adapt, and learn. As a Cybersecurity adept, I've immersed myself in SOC operations, threat intelligence, and security architecture, gaining hands-on experience with Splunk, Wireshark, Nmap, Docker, and Python. Each project I tackle sharpens my skills and reinforces my approach: combine technical depth with strategic thinking to protect organizations while enabling their growth.</p>
+                <p>Outside the digital battlefield, I'm equally passionate about real-world exploration. I've led treks, honing leadership, planning, and risk-assessment skills that often translate into how I approach complex security challenges. The ability to adapt quickly isn't just a skill — it's a fundamental instinct for survival, whether on a trip or in the ever-evolving landscape of cybersecurity. I'm also an avid reader — because I believe today's reader is tomorrow's leader.</p>
+                <p>I'm an early riser, finding my focus at the break of dawn, and I constantly challenge myself to communicate and present ideas effectively — whether it's through team briefings or personal exercises to refine my thought process. My philosophy is simple: embrace every challenge, learn constantly, and balance technical mastery with human insight. After all, if you secure the human link, half the cyber battles are already won.</p>
+
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>🛡️ SIEM & SOC Tools</h3>
+                        <p>Splunk (SPL), IBM QRadar, Microsoft Azure Sentinel</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🔍 Threat Detection & Analysis</h3>
+                        <p>CrowdStrike Falcon (EDR), Snort, Suricata, Wireshark, TCPDump, MITRE ATT&CK, Shodan, OSINT, Tenable.io, Nessus</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>☁️ Cloud & DevSecOps</h3>
+                        <p>AWS, Microsoft Azure, Kubernetes Security, Docker, Terraform, Python, Bash, PowerShell, Burp Suite, OWASP Top 10</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🏢 Governance, Risk & Compliance (GRC)</h3>
+                        <p>NIST CSF, NIST 800-53, ISO 27001, PCI-DSS, GDPR, HIPAA, Control Mapping, Gap Analysis, Audit Support</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🔐 Network & Access Security</h3>
+                        <p>FortiGate, Palo Alto, Zero Trust Architecture, Network Segmentation</p>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🧠 Human-Centric Security</h3>
+                        <p>Security Awareness Training, Phishing Simulation Campaigns, Cyber Awareness Workshops</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Information Technology Assistant</h3>
+                    <span class="date">Feb 2024 - Jan 2025 · 1 yr</span>
+                    <span class="location">Boston, Massachusetts</span>
+                    <p>Northeastern University</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Security Operations Center Analyst</h3>
+                    <span class="date">Jan 2023 - Sep 2023 · 9 mos</span>
+                    <span class="location">Ahmedabad, India</span>
+                    <p>Adani Enterprises Limited</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>GRC Consultant</h3>
+                    <span class="date">Aug 2022 - Dec 2022 · 5 mos</span>
+                    <span class="location">Ahmedabad, India</span>
+                    <p>Securis360 Inc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Master of Science in Cybersecurity</h3>
+                    <span class="date">2024 - Present</span>
+                    <span class="location">Boston, MA</span>
+                    <p>Northeastern University, Khoury College of Computer Sciences</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Bachelor of Technology in Computer Engineering</h3>
+                    <span class="date">2019 - 2023</span>
+                    <span class="location">Gandhinagar, Gujarat, India</span>
+                    <p>SSIU - Swarnim Startup & Innovation University</p>
+                    <p>Grade: 8.85 CGPA</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Professional Certificate in Innovation and Entrepreneurship</h3>
+                    <span class="date">2019 - 2023</span>
+                    <span class="location">Gandhinagar, Gujarat, India</span>
+                    <p>SSIU - Swarnim Startup & Innovation University</p>
+                    <p>Grade: Distinction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>SOC Log Hunting With Splunk and MITRE ATT&CK alignment</h3>
+                    <a href="https://github.com/whoami-mihir/soc-log-hunting-splunk" target="_blank" class="project-link">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <h3>Threat Detection Lab with Snort and Wireshark</h3>
+                    <a href="https://github.com/whoami-mihir/threat-detection-lab" target="_blank" class="project-link">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <h3>Azure Sentinel KQL Library & Threat Monitoring</h3>
+                    <a href="https://github.com/whoami-mihir/azure-sentinel-kql" target="_blank" class="project-link">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <h3>Firewall microsegmentation & MFA integration</h3>
+                    <a href="https://github.com/whoami-mihir/firewall-microsegmentation" target="_blank" class="project-link">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <h3>OWASP Top10 Attack and Defense</h3>
+                    <a href="https://github.com/whoami-mihir/owasp-top10" target="_blank" class="project-link">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <h3>Automated Vulnerability Management with Nessus and Python Script</h3>
+                    <a href="https://github.com/whoami-mihir/vulnerability-management" target="_blank" class="project-link">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <h3>Digital Forensics & Incident Response Playbook</h3>
+                    <a href="https://github.com/whoami-mihir/dfir-playbook" target="_blank" class="project-link">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <h3>Policy Drafting: AI in Workplace</h3>
+                    <a href="https://github.com/whoami-mihir/ai-policy-drafting" target="_blank" class="project-link">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <a href="mailto:trivedi.mih@northeastern.edu" class="contact-btn">
+                        <i class="fas fa-envelope"></i>Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/whoami-mihir" target="_blank" class="contact-btn">
+                        <i class="fab fa-linkedin-in"></i>LinkedIn
+                    </a>
+                    <a href="https://github.com/whoami-mihir" target="_blank" class="contact-btn">
+                        <i class="fab fa-github"></i>GitHub
+                    </a>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/mjvnzzqk" method="POST">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <input type="text" name="subject" placeholder="Subject" required>
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        Message sent successfully!
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mihir Trivedi. All rights reserved.</p>
+            <p id="visitor-count"></p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Section reveal animation
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                if (window.scrollY > sectionTop - window.innerHeight + 100) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+
+        // Visitor count using localStorage
+        let visits = localStorage.getItem('visits') || 0;
+        visits++;
+        localStorage.setItem('visits', visits);
+        document.getElementById('visitor-count').textContent = `Visitor Count: ${visits}`;
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll to section function
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                window.scrollTo({
+                    top: section.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
+        }
+
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        const toast = document.getElementById('toast');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(contactForm);
+                
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Show success toast
+                        toast.classList.add('show');
+                        contactForm.reset();
+                        
+                        // Hide toast after 3 seconds
+                        setTimeout(() => {
+                            toast.classList.remove('show');
+                        }, 3000);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    alert('There was a problem sending your message. Please try again later.');
+                }
+            });
+        }
+
+        // Initialize section visibility on page load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('section').forEach((section, index) => {
+                // Add slight delay for sequential animation
+                setTimeout(() => {
+                    if (section.getBoundingClientRect().top < window.innerHeight - 100) {
+                        section.classList.add('visible');
+                    }
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
